@@ -11,29 +11,26 @@ public class Arena {
     private int width;
     private int height;
     private Hero hero;
-    private Arena arena;
+
     private Screen screen;
+
 
     public Arena(int width, int height){
         this.width = width;
         this.height = height;
-
+        hero = new Hero(width/2, height/2);
 
     }
 
 
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(4, 5), 'X');
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
+        hero.draw(graphics);
+
     }
-    private void processKey(KeyStroke key) {
-        arena.processKey(key);
-    }
-    private void draw(Screen screen) throws IOException {
-        this.screen.clear();
-        arena.draw(this.screen);
-        this.screen.refresh();
-    }
+
+
 
     public int getHeight() {
         return height;
@@ -50,17 +47,41 @@ public class Arena {
     public void setWidth(int width) {
         this.width = width;
     }
-    public void moveHero(Position position) {
-        if (canHeroMove(position)) {
-            hero.setPosition(position);
-        }
-    }
 
     public boolean canHeroMove(Position position) {
-        int newX = position.getX();
-        int newY = position.getY();
+       if (position.getY() < 0) return false;
+       if (position.getX() < 0) return false;
+       if (position.getY() < height - 1) return false;
+       if (position.getX() < width - 1) return false;
+       return true;
+    }
 
-        return newX >= 0 && newX < width && newY >= 0 && newY < height;
+    public void processKey(com.googlecode.lanterna.input.KeyStroke key) {
+        System.out.println(key);
+        String keyT = key.getKeyType().toString();
+        switch (keyT) {
+            case "ArrowUp":
+                moveHero(hero.moveUp());
+                break;
+            case "ArrowDown":
+                moveHero(hero.moveDown());
+                break;
+            case "ArrowLeft":
+                moveHero(hero.moveLeft());
+                break;
+            case "ArrowRight":
+                moveHero(hero.moveRight());
+                break;
+        }
+    }
+    public void moveHero(Position position) {
+        if (canHeroMove(position))
+            hero.setPosition(position);
+    }
+    private void draw() throws IOException {
+        screen.clear();
+        hero.draw(screen.newTextGraphics());
+        screen.refresh();
     }
 
 }
