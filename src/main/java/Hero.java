@@ -35,6 +35,7 @@ public class Hero {
     }
 
     public void processKey(KeyStroke key){
+
     }
 
     public void draw(TextGraphics graphics) {

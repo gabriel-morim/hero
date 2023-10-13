@@ -13,7 +13,7 @@ public class Game {
     private int x;
     private int y;
 
-    private Arena arena;
+    private final Arena arena;
 
     private void processKey(KeyStroke key) {
         arena.processKey(key);
@@ -46,6 +46,7 @@ public class Game {
             processKey(key);
         }
     }
+
 
 
 

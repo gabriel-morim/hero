@@ -28,6 +28,7 @@ public class Arena {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         hero.draw(graphics);
 
+
     }
 
 
@@ -51,8 +52,8 @@ public class Arena {
     public boolean canHeroMove(Position position) {
        if (position.getY() < 0) return false;
        if (position.getX() < 0) return false;
-       if (position.getY() < height - 1) return false;
-       if (position.getX() < width - 1) return false;
+       if (position.getY() > height - 1) return false;
+       if (position.getX() > width - 1) return false;
        return true;
     }
 
@@ -78,11 +79,8 @@ public class Arena {
         if (canHeroMove(position))
             hero.setPosition(position);
     }
-    private void draw() throws IOException {
-        screen.clear();
-        hero.draw(screen.newTextGraphics());
-        screen.refresh();
-    }
+
+
 
 }
 
