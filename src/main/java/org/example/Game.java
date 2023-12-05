@@ -1,3 +1,4 @@
+package org.example ;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -6,6 +7,8 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
+import org.example.*;
+
 import java.io.IOException;
 public class Game {
 
@@ -46,10 +49,8 @@ public class Game {
             processKey(key);
         }
     }
-
-
-
-
-
-
 }
+
+
+
+
